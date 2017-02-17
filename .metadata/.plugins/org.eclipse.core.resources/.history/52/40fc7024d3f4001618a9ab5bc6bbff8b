@@ -1,0 +1,44 @@
+package com.anutosh.crack;
+
+public class Contacts {
+	
+	private TrieNode root = null;
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+	
+	private void add(String word){
+		if(root == null){
+			root = new TrieNode();
+		}
+		
+		TrieNode currNode = root;
+		for(int i = 0; i < word.length(); i++){
+			char c = word.charAt(i);
+			if(!currNode.characterMap.containsKey(c)){
+				TrieNode node = new TrieNode();
+				node.completeWord = (i == word.length() - 1);
+				
+				currNode.characterMap.put(c, node);
+				
+				currNode = node;
+			}else{
+				currNode = currNode.characterMap.get(c);
+			}
+			
+		}
+	}
+	
+	private void add(char c, boolean endOfWord){
+		
+		if(!root.characterMap.containsKey(c)){
+			TrieNode node = new TrieNode();
+			node.completeWord = endOfWord;
+			
+			root.characterMap.put(c, node);
+		}
+	}
+
+}

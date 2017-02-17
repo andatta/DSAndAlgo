@@ -1,0 +1,43 @@
+package com.anutosh.crack;
+
+public class BubbleSort {
+
+	public static void main(String[] args) {
+		
+		try{
+			String s = "AB";
+			s.toLowerCase();
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			System.out.println("Finally!!");
+		}
+	}
+	
+	private static void bubbleSort(int[] arr){
+		int n = arr.length;
+		 int totalSwaps = 0;
+		 boolean swapped = true;
+		 
+		while(swapped){
+			int endOffset = 0;
+			swapped = false;
+			for(int j = 1; j < (n - 1)-endOffset; j++){
+				if(arr[j] > arr[j + 1]){
+					int temp = arr[j];
+					arr[j] = arr[j + 1];
+					arr[j + 1] = temp;
+					
+					swapped = true;
+					totalSwaps++;
+				}
+			}
+			
+		}
+		
+		System.out.println("Array is sorted in " + totalSwaps + " swaps.");
+		System.out.println("First element: " + arr[0]);
+		System.out.println("Last element: " + arr[n - 1]);
+	}
+
+}

@@ -1,0 +1,6 @@
+package com.anutosh.tree;
+
+public class BinaryTree {
+
+	public Node rootNode;
+}

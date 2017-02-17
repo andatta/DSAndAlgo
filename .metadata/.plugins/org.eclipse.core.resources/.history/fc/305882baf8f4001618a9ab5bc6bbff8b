@@ -1,0 +1,16 @@
+package com.anutosh.crack;
+
+public class Contacts {
+
+	public static void main(String[] args) {
+		TrieNode node = new TrieNode();
+		
+		node.add("anutosh");
+		node.add("anindita");
+		node.add("sanghamitra");
+		
+		System.out.println(node.findCount("anu"));
+
+	}
+
+}

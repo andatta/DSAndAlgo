@@ -1,0 +1,57 @@
+package com.anutosh.crack;
+
+public class Contacts {
+	
+	private TrieNode root = null;
+
+	public static void main(String[] args) {
+		Contacts contacts = new Contacts();
+		contacts.add("anutosh");
+		contacts.add("anindita");
+		contacts.add("sanghamitra");
+		
+		System.out.println(contacts.findPartial("a"));
+
+	}
+	
+	private void add(String word){
+		if(root == null){
+			root = new TrieNode();
+		}
+		
+		TrieNode currNode = root;
+		for(int i = 0; i < word.length(); i++){
+			char c = word.charAt(i);
+			if(!currNode.characterMap.containsKey(c)){
+				TrieNode node = new TrieNode();
+				node.completeWord = (i == word.length() - 1);
+				
+				currNode.characterMap.put(c, node);
+				
+				currNode = node;
+			}else{
+				currNode = currNode.characterMap.get(c);
+			}
+			
+		}
+	}
+	
+	private int findPartial(String partial){
+		if(root != null){
+			TrieNode currNode = root;
+			
+			for(int i = 0; i < partial.length(); i++){
+				char c = partial.charAt(i);
+				if(!currNode.characterMap.containsKey(c)){
+					return 0;
+				}
+				
+				currNode = currNode.characterMap.get(c);
+			}
+			
+			return currNode.characterMap.size();
+		}
+		return 0;
+	}
+
+}

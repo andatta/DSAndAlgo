@@ -1,0 +1,230 @@
+package com.anutosh;
+
+import java.util.Scanner;
+
+public class LinkedList {
+
+	public static void main(String[] args) {
+
+		Node head = null;
+
+		System.out.println("Select one from below choices:");
+		System.out.println("1. Insert elements to end of list");
+		System.out.println("2. Insert elements to head of list");
+		System.out.println("3. Insert elements to position of list");
+		System.out.println("4. Delete node at position");
+		System.out.println("5. Reverse node");
+		System.out.println("6. Merge lists");
+
+		Scanner scanner = new Scanner(System.in);
+		int opt = scanner.nextInt();
+
+		switch (opt) {
+		case 1:
+			head = insertElementsAtTail();
+			break;
+		case 2:
+			head = insertElementsAtHead(10);
+			break;
+		case 3:
+			head = insertElementsAtHead(10);
+			int pos = scanner.nextInt();
+			int data = scanner.nextInt();
+
+			head = insertElementsAtPosition(head, data, pos);
+			break;
+		case 4:
+			head = insertElementsAtHead(2);
+			int deletepos = scanner.nextInt();
+
+			head = DeleteNode(head, deletepos);
+			printLinkedList(head);
+			break;
+		case 5:
+			head = insertElementsAtTail();
+			System.out.println();
+			head = Reverse(head);
+			printLinkedList(head);
+			break;
+
+		}
+
+	}
+
+	private static Node insertElementsAtTail() {
+		Node head = null;
+		for (int i = 1; i <= 10; i++) {
+			head = insertAtTail(head, i);
+		}
+		printLinkedList(head);
+		return head;
+	}
+
+	private static Node insertElementsAtHead(int size) {
+		Node head = null;
+		for (int i = 1; i <= size; i++) {
+			head = insertAtHead(head, i);
+		}
+		printLinkedList(head);
+		return head;
+	}
+
+	private static Node insertElementsAtPosition(Node head, int data, int pos) {
+		head = insertNth(head, data, pos);
+		printLinkedList(head);
+		return head;
+	}
+
+	private static Node insertAtTail(Node head, int data) {
+		Node newNode = new Node();
+		newNode.data = data;
+
+		if (head == null) {
+			head = newNode;
+		} else {
+			Node last = head;
+			while (last.next != null) {
+				last = last.next;
+			}
+			last.next = newNode;
+		}
+		return head;
+	}
+
+	private static Node insertAtHead(Node head, int data) {
+		Node newNode = new Node();
+		newNode.data = data;
+
+		if (head == null) {
+			head = newNode;
+		} else {
+			newNode.next = head;
+			head = newNode;
+		}
+		return head;
+	}
+
+	private static Node insertNth(Node head, int data, int position) {
+		Node n = new Node();
+		n.data = data;
+
+		if (head == null) {
+			head = n;
+		} else {
+			Node currNode = head;
+			Node prev = null;
+
+			for (int i = 0; i < position; i++) {
+				prev = currNode;
+				currNode = currNode.next;
+			}
+
+			n.next = currNode;
+			currNode = n;
+			if (prev != null) {
+				prev.next = currNode;
+			} else {
+				head = currNode;
+			}
+		}
+
+		return head;
+	}
+
+	private static Node DeleteNode(Node head, int position) {
+		if (head == null) {
+			return null;
+		}
+
+		Node currNode = head;
+		Node prev = null;
+
+		for (int i = 0; i < position; i++) {
+			prev = currNode;
+			currNode = currNode.next;
+		}
+
+		if (currNode != null) {
+			if (prev != null) {
+				prev.next = currNode.next;
+			} else {
+				head = currNode.next;
+			}
+		}
+
+		return head;
+	}
+
+	private static Node Reverse(Node head) {
+		Node prev = null;
+		Node current = head;
+		Node next = null;
+		while (current != null) {
+			next = current.next;
+			current.next = prev;
+			prev = current;
+			current = next;
+		}
+		head = prev;
+		return head;
+	}
+
+	private static Node mergeLists(Node head1, Node head2) {
+		if (head1 == null && head2 == null) {
+			return null;
+		} else if (head1 == null) {
+			return head2;
+		} else if (head2 == null) {
+			return head1;
+		} else {
+			if (head1.data < head2.data) {
+				Node curr1 = head1;
+				while (head2 != null) {
+
+					Node next1 = curr1.next;
+					Node next2 = head2.next;
+					curr1.next = head2;
+					head2.next = next1;
+
+					curr1 = next1;
+					head2 = next2;
+
+				}
+				return head1;
+			}else{
+				Node curr2 = head2;
+				while (head1 != null) {
+
+					Node next2 = curr2.next;
+					Node next1 = head1.next;
+					curr2.next = head1;
+					head1.next = next2;
+
+					curr2 = next2;
+					head1 = next1;
+
+				}
+				return head2;
+			}
+		}
+	}
+
+	private static void printLinkedList(Node head) {
+		while (head != null) {
+			System.out.print(head.data + " ");
+			head = head.next;
+		}
+	}
+
+	private static void ReversrePrint(Node head) {
+		recReverse(head);
+	}
+
+	private static void recReverse(Node n) {
+		if (n != null) {
+			recReverse(n.next);
+			System.out.println(n.data);
+		}
+	}
+
+}

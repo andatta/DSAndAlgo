@@ -1,0 +1,26 @@
+package com.anutosh.crack;
+
+import java.util.Arrays;
+
+public class ComparatorSort {
+
+	public static void main(String[] args) {
+		Player[] player = new Player[5];
+		
+//		amy 100
+//		david 100
+//		heraldo 50
+//		aakansha 75
+//		aleksa 150
+		
+		player[0] = new Player("amy", 100);
+		player[1] = new Player("david", 100);
+		player[2] = new Player("heraldo", 50);
+		player[3] = new Player("aakansha", 75);
+		player[4] = new Player("aleksa", 150);
+		
+		Arrays.sort(player, new Checker());
+
+	}
+
+}

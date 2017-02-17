@@ -1,0 +1,59 @@
+package com.anutosh.crack;
+
+import java.util.HashMap;
+import java.util.Map;
+
+public class TrieNode {
+	
+	Map<Character, TrieNode> characterMap = new HashMap<>();
+	boolean completeWord = false;
+	int size = 0;
+	
+	private TrieNode getNode(char c){
+		if(characterMap.containsKey(c)){
+			return characterMap.get(c);
+		}
+		return null;
+	}
+	
+	private void setNode(char c, TrieNode node){
+		characterMap.put(c, node);
+	}
+	
+	public void add(String s){
+		add(s, 0);
+	}
+	
+	private void add(String s, int index){
+		size++;
+		if(index == s.length()){
+			return;
+		}
+		
+		char c = s.charAt(index);
+		TrieNode child = getNode(c);
+		if(child == null){
+			child = new TrieNode();
+			setNode(c, child);
+		}
+		child.add(s, index + 1);
+	}
+	
+	public int findCount(String s){
+		return findCount(s, 0);
+	}
+	
+	private int findCount(String s, int index){
+		if(index == s.length()){
+			return size;
+		}
+		
+		char c = s.charAt(index);
+		TrieNode child = getNode(c);
+		if(child == null){
+			return 0;
+		}
+		return child.findCount(s, index + 1);
+	}
+
+}

@@ -1,0 +1,26 @@
+package com.anutosh;
+
+public class LinkedList {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+	private static Node insertAtTail(Node head, int data) {
+		Node newNode = new Node();
+		newNode.data = data;
+
+		if (head == null) {
+			head = newNode;
+		} else {
+			Node last = head;
+			while (last.next != null) {
+				last = last.next;
+			}
+			last.next = newNode;
+		}
+		return head;
+	}
+
+}

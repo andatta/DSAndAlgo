@@ -1,0 +1,38 @@
+package com.anutosh.tree;
+
+public class Tree {
+
+	public static void main(String[] args) {
+		BinaryTree tree = new BinaryTree();
+		Node root = tree.insertRoot(3);
+		Node n5 = tree.insertL(root, 5);
+		Node n1 = tree.insertL(n5, 1);
+		Node n4 = tree.insertR(n5, 4);
+		Node n2 = tree.insertR(root, 2);
+		Node n6 = tree.insertL(n2, 6);
+		
+		
+		preOrderTraversal(tree.rootNode);
+	}
+	
+	private static void preOrderTraversal(Node node){
+		System.out.print(node.data + " ");
+		if(node.left != null){
+			preOrderTraversal(node.left);
+		}
+		if(node.right != null){
+			preOrderTraversal(node.right);
+		}
+	}
+	
+	private static void postOrder(Node root){
+		if(root.left != null){
+			preOrderTraversal(root.left);
+		}
+		if(root.right != null){
+			preOrderTraversal(root.right);
+		}
+		System.out.print(root.data + " ");
+	}
+
+}

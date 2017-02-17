@@ -1,0 +1,9 @@
+package com.anutosh.crack;
+
+import java.util.Map;
+
+public class TrieNode {
+	
+	Map<Character, Trie>
+
+}

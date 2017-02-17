@@ -1,0 +1,157 @@
+package com.anutosh;
+
+import java.util.Scanner;
+
+public class LinkedList {
+
+	public static void main(String[] args) {
+
+		Node head = null;
+
+		System.out.println("Select one from below choices:");
+		System.out.println("1. Insert elements to end of list");
+		System.out.println("2. Insert elements to head of list");
+		System.out.println("3. Insert elements to position of list");
+		System.out.println("4. Delete node at position");
+
+		Scanner scanner = new Scanner(System.in);
+		int opt = scanner.nextInt();
+
+		switch (opt) {
+		case 1:
+			head = insertElementsAtTail();
+			break;
+		case 2:
+			head = insertElementsAtHead();
+			break;
+		case 3:
+			head = insertElementsAtHead();
+			int pos = scanner.nextInt();
+			int data = scanner.nextInt();
+
+			head = insertElementsAtPosition(head, data, pos);
+			break;
+		case 4:
+			head = insertElementsAtHead();
+			int deletepos = scanner.nextInt();
+
+			head = DeleteNode(head, deletepos);
+			printLinkedList(head);
+			break;
+
+		}
+
+	}
+
+	private static Node insertElementsAtTail() {
+		Node head = null;
+		for (int i = 1; i <= 10; i++) {
+			head = insertAtTail(head, i);
+		}
+		printLinkedList(head);
+		return head;
+	}
+
+	private static Node insertElementsAtHead() {
+		Node head = null;
+		for (int i = 1; i <= 10; i++) {
+			head = insertAtHead(head, i);
+		}
+		printLinkedList(head);
+		return head;
+	}
+
+	private static Node insertElementsAtPosition(Node head, int data, int pos) {
+		head = insertNth(head, data, pos);
+		printLinkedList(head);
+		return head;
+	}
+
+	private static Node insertAtTail(Node head, int data) {
+		Node newNode = new Node();
+		newNode.data = data;
+
+		if (head == null) {
+			head = newNode;
+		} else {
+			Node last = head;
+			while (last.next != null) {
+				last = last.next;
+			}
+			last.next = newNode;
+		}
+		return head;
+	}
+
+	private static Node insertAtHead(Node head, int data) {
+		Node newNode = new Node();
+		newNode.data = data;
+
+		if (head == null) {
+			head = newNode;
+		} else {
+			newNode.next = head;
+			head = newNode;
+		}
+		return head;
+	}
+
+	private static Node insertNth(Node head, int data, int position) {
+		Node n = new Node();
+		n.data = data;
+
+		if (head == null) {
+			head = n;
+		} else {
+			Node currNode = head;
+			Node prev = null;
+
+			for (int i = 0; i < position; i++) {
+				prev = currNode;
+				currNode = currNode.next;
+			}
+
+			n.next = currNode;
+			currNode = n;
+			if (prev != null) {
+				prev.next = currNode;
+			} else {
+				head = currNode;
+			}
+		}
+
+		return head;
+	}
+
+	private static Node DeleteNode(Node head, int position) {
+		if (head == null) {
+			return null;
+		}
+
+		Node currNode = head;
+		Node prev = null;
+
+		for (int i = 0; i < position; i++) {
+			prev = currNode;
+			currNode = currNode.next;
+		}
+
+		if (currNode != null) {
+			if (prev != null) {
+				prev.next = currNode.next;
+			} else {
+				head = currNode.next;
+			}
+		}
+
+		return head;
+	}
+
+	private static void printLinkedList(Node head) {
+		while (head != null) {
+			System.out.print(head.data + " ");
+			head = head.next;
+		}
+	}
+
+}

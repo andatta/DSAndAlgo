@@ -1,0 +1,21 @@
+package com.anutosh.crack;
+
+public class Anagrams {
+
+	public static void main(String[] args) {
+		String s1 = "cde";
+		String s2 = "abc";
+		
+		char[] char_arr = s1.toCharArray();
+		for(char c : char_arr){
+			if(s2.indexOf(c) != -1){
+				s1 = s1.replace(String.valueOf(c), "");
+				s2 = s2.replace(String.valueOf(c), "");
+			}
+		}
+		
+		System.out.print(s1.length() + s2.length());
+
+	}
+
+}

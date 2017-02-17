@@ -1,0 +1,141 @@
+package com.anutosh.tree;
+
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.Queue;
+import java.util.Scanner;
+import java.util.TreeMap;
+
+public class Tree {
+	
+	public static Node insert(Node root, int data) {
+        if(root == null){
+            return new Node(data);
+        }
+        else {
+            Node cur;
+            if(data <= root.data){
+                cur = insert(root.left, data);
+                root.left = cur;
+            }
+            else{
+                cur = insert(root.right, data);
+                root.right = cur;
+            }
+            return root;
+        }
+    }
+
+	public static void main(String[] args) {
+//		BinaryTree tree = new BinaryTree();
+//		Node root = tree.insertRoot(3);
+//		Node n5 = tree.insertL(root, 5);
+//		Node n1 = tree.insertL(n5, 1);
+//		Node n4 = tree.insertR(n5, 4);
+//		Node n2 = tree.insertR(root, 2);
+//		Node n6 = tree.insertL(n2, 6);
+		
+		Node root = insert(null, 3);
+		root = insert(root, 2);
+		root = insert(root, 1);
+		root = insert(root, 5);
+		root = insert(root, 4);
+		root = insert(root, 6);
+		root = insert(root, 7);
+		
+		System.out.println("Select one from below choices:");
+		System.out.println("1. Pre-order traversal");
+		System.out.println("2. Post order traversal");
+		System.out.println("3. In order traversal");
+		System.out.println("4. Height of tree");
+		System.out.println("5. top view of tree");
+		
+		Scanner scanner = new Scanner(System.in);
+		int opt = scanner.nextInt();
+
+		switch (opt) {
+		case 1:
+			preOrderTraversal(root);
+			break;
+		case 2:
+			postOrder(root);
+			break;
+		case 3:
+			inOrder(root);
+			break;
+		case 4:
+			System.out.println(height(root));
+		case 5:
+			topView(root);
+		}
+	}
+	
+	private static void preOrderTraversal(Node node){
+		System.out.print(node.data + " ");
+		if(node.left != null){
+			preOrderTraversal(node.left);
+		}
+		if(node.right != null){
+			preOrderTraversal(node.right);
+		}
+	}
+	
+	private static void postOrder(Node root){
+		if(root.left != null){
+			postOrder(root.left);
+		}
+		if(root.right != null){
+			postOrder(root.right);
+		}
+		System.out.print(root.data + " ");
+	}
+	
+	private static void inOrder(Node root){
+		if(root.left != null){
+			inOrder(root.left);
+		}
+		System.out.print(root.data + " ");
+		
+		if(root.right != null){
+			inOrder(root.right);
+		}
+	}
+	
+	private static void topView(Node root){
+		if(root == null){
+			return;
+		}
+		TreeMap<Integer, Integer> ht = new TreeMap<>();
+		
+		Queue<QueuePack> queue = new LinkedList<>();
+		queue.add(new QueuePack(root, 0));
+		
+		while(!queue.isEmpty()){
+			QueuePack q = queue.remove();
+			
+			Node n = q.getNode();
+			int lvl = q.getLevel();
+			
+			if(!ht.containsKey(lvl)){
+				ht.put(lvl, n.data);
+				System.out.print(n.data + " ");
+			}
+			
+			if(n.left != null){
+				queue.add(new QueuePack(n.left, lvl + 1));
+			}
+			if(n.right != null){
+				queue.add(new QueuePack(n.right, lvl - 1));
+			}
+		}
+	}
+	
+	private static int height(Node root){
+		if(root == null){
+			return -1;
+		}else{
+			return 1 + Math.max(height(root.left), height(root.right));
+		}
+	}
+
+}

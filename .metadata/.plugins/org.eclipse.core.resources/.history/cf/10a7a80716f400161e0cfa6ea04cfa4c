@@ -1,0 +1,33 @@
+package com.anutosh.tree;
+
+public class BinaryTree {
+
+	public Node rootNode;
+	
+	public void insert(int val, boolean left, boolean right){
+		if(rootNode == null){
+			rootNode = new Node();
+			rootNode.data = val;
+		}else{
+			
+		}
+	}
+	
+	public void insertLeft(Node n, int val){
+		if(n.left != null){
+			insertLeft(n.left, val);
+		}else{
+			n.left = new Node();
+			n.left.data = val;
+		}
+	}
+	
+	public void insertRight(Node n, int val){
+		if(n.right != null){
+			insertRight(n.right, val);
+		}else{
+			n.right = new Node();
+			n.right.data = val;
+		}
+	}
+}
