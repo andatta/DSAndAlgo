@@ -6,6 +6,9 @@ import java.util.Map;
 import java.util.Scanner;
 
 public class LinkedList {
+	
+	static int count = -1;
+	static int nodeVal = 0;
 
 	public static void main(String[] args) {
 
@@ -18,6 +21,8 @@ public class LinkedList {
 		System.out.println("4. Delete node at position");
 		System.out.println("5. Reverse node");
 		System.out.println("6. Has cycle");
+		System.out.println("7. Compare two lists");
+		System.out.println("8. Get node value");
 
 		Scanner scanner = new Scanner(System.in);
 		int opt = scanner.nextInt();
@@ -52,6 +57,18 @@ public class LinkedList {
 		case 6:
 			head = insertElementsAtTail();
 			System.out.println(hasCycle(head));
+			break;
+		case 7:
+			head = insertElementsAtHead(10);
+			System.out.println();
+			Node headA = insertElementsAtTail();
+			System.out.println();
+			System.out.println(CompareLists(headA, head));
+			break;
+		case 8:
+			head = insertElementsAtTail();
+			System.out.println();
+			System.out.println(GetNode(head, 4));
 			break;
 
 		}
@@ -94,7 +111,6 @@ public class LinkedList {
 				last = last.next;
 			}
 			last.next = newNode;
-			newNode.next = head;
 		}
 		return head;
 	}
@@ -247,6 +263,36 @@ public class LinkedList {
 			recReverse(n.next);
 			System.out.println(n.data);
 		}
+	}
+	
+	private static int CompareLists(Node headA, Node headB){
+		while(headA != null || headB != null){
+			if(headA == null && headB != null){
+				return 0;
+			}else if(headA != null && headB == null){
+				return 0;
+			}else{
+				if(headA.data != headB.data){
+					return 0;
+				}
+			}
+			headA = headA.next;
+			headB = headB.next;
+		}
+		return 1;
+	}
+	
+	private static int GetNode(Node head,int n){
+		if(head.next != null){
+			GetNode(head.next, n);
+		}
+		
+		count = count + 1;
+		
+		if(count == n){
+			nodeVal = head.data;
+		}
+		return nodeVal;
 	}
 
 }

@@ -23,6 +23,18 @@ public class Tree {
 			return root;
 		}
 	}
+	
+	public static Node createTestTree(){
+		Node root = insert(null, 3);
+		root = insert(root, 2);
+		root = insert(root, 1);
+		root = insert(root, 5);
+		root = insert(root, 4);
+		root = insert(root, 6);
+		root = insert(root, 7);
+		
+		return root;
+	}
 
 	public static void main(String[] args) {
 		// BinaryTree tree = new BinaryTree();

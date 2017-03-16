@@ -24,7 +24,7 @@ public class QuickSort {
 				arr[r] = arr[q];
 				arr[q] = temp;
 			} else {
-				if (arr[j] > arr[r]) {
+				if (arr[j] <= arr[r]) {
 					int temp = arr[j];
 					arr[j] = arr[q];
 					arr[q] = temp;
