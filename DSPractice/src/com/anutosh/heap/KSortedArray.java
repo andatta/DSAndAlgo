@@ -14,27 +14,14 @@ public class KSortedArray {
 		for(int i = (k + 1)/2 -1; i >= 0; i--){
 			HeapSort.heapifyMin(arr, k+1, i); 
 		}
-		for(int j = 0; j < arr.length; j++){
-			System.out.print(arr[j] + " ");
-		}
-		System.out.println();
 		
 		for(int i = k + 1, ti = 0; ti < arr.length; i++, ti++){
 			if(i < arr.length){
-				hrr[ti] = arr[0];
-				arr[0] = arr[i];
-				HeapSort.heapifyMin(arr, k+1, 0);
-				
-				for(int j = 0; j < arr.length; j++){
-					System.out.print(arr[j] + " ");
-				}
-				System.out.println();
+				hrr[ti] = HeapSort.replaceMin(arr, k + 1, arr[i]);
 			}else{
-				hrr[ti] = KSmallestElements.extractMin(arr, arr.length);
+				hrr[ti] = KSmallestElements.extractMin(arr, arr.length - ti);
 			}
 		}
-		
-		System.out.println();
 		for(int i = 0; i < hrr.length; i++){
 			System.out.print(hrr[i] + " ");
 		}
