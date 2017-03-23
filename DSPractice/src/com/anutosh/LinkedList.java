@@ -23,6 +23,7 @@ public class LinkedList {
 		System.out.println("6. Has cycle");
 		System.out.println("7. Compare two lists");
 		System.out.println("8. Get node value");
+		System.out.println("9. Reverse a linked list");
 
 		Scanner scanner = new Scanner(System.in);
 		int opt = scanner.nextInt();
@@ -69,6 +70,11 @@ public class LinkedList {
 			head = insertElementsAtTail();
 			System.out.println();
 			System.out.println(GetNode(head, 4));
+			break;
+		case 9:
+			head = insertElementsAtTail();
+			head = reverse(head);
+			printLinkedList(head);
 			break;
 
 		}
@@ -293,6 +299,22 @@ public class LinkedList {
 			nodeVal = head.data;
 		}
 		return nodeVal;
+	}
+	
+	private static Node reverse(Node head){
+		Node prev = null;
+		Node current = head;
+		Node next = null;
+		
+		while(current != null){
+			next = current.next;
+			current.next = prev;
+			prev = current;
+			current = next;
+			
+		}
+		
+		return prev;
 	}
 
 }
